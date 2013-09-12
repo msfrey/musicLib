@@ -14,8 +14,21 @@ int readFile(char* filename){
 
 int main(){
 
-  readFile("music0.mp3");
+  /* readFile("music0.mp3"); */
   
+  char c[4] = {'0', '1', '2', '3'};
+  c[0] = c[0] & 127;
+  c[0] = c[0] << 1;
+  c[1] = c[1] & 127;
+  c[1] = c[1] << 1;
+  c[2] = c[2] & 127;
+  c[2] = c[2] << 1;
+  c[3] = c[3] & 127;
+  c[3] = c[3] << 1;
+  for(int i = 0; i < 4; i++){
+    printf("%s\n", c[i]);
+  }
+
   return 0;
   
 }
