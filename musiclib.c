@@ -2,24 +2,53 @@
 #include <stdlib.h>
 
 typedef struct{
-   char tag[3];
-   char title[30];
-   char artist[30];
-   char album[30];
-   char year[4];
-   char comment[30];
 }mp3Tags;
+
+typdef struct{
+  char frameID[4];
+  int frameSize;
+}frameHeader;
+
+typdef struct{
+  char ID3[3];
+  char version[2];
+  char flags[1];
+  int totalSize;
+}globalHeader;
+
+int sizeCalc(char c[4]){
+  int sum = 0;
+  for(int i = 0; i < 3; i++){
+    c[i] =c [i] & 127;
+    sum += c[i];
+    sum = sum << 7;
+  }
+  c[3] = c[3] & 127;
+  sum += c[3];
+  
+  return sum;
+}
+
+
+frameHeader readHeader(char* filestream){
+  frameHeader frameHeader;
+  // reads frame header and returns information in
+  // framHeader struct
+  return frameHeader;
+}
+
+char readFrame(int size){
+  char* frame[size];
+  // takes in frame size and reads frame information
+  // and returns a char array
+  return frame;
+}
 
 mp3Tags readFile(char* filename){
   FILE *filestream = fopen(filename, "r");
-  mp3Tags Tags;
-  fgets(Tags.tag, sizeof(Tags.tag), filestream);
-  fgets(Tags.title, sizeof(Tags.title), filestream);
-  fgets(Tags.artist, sizeof(Tags.artist), filestream);
-  fgets(Tags.album, sizeof(Tags.album), filestream);
-  fgets(Tags.year, sizeof(Tags.year), filestream);
-  fgets(Tags.comment, sizeof(Tags.comment), filestream);
-  return Tags;
+  frameHeader currentFrame = readHeader();
+  char* frame = readFrame(currentFrame.framSize);
+  frame 
 }
 
 int main(){
