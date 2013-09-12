@@ -1,15 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <convert_content.h>
 
 int readFile(char* filename){
   FILE* filestream = fopen(filename, "r");
 
-  char buffer[10];
-  int read[4] = {3, 7, 4, 6};
-  for(int i=0; i<1; i++){
-    buffer = convert_content(filestream, 10);
-    printf(">>> %s\n", buffer);
+  char buffer[2];
+  for(int i=0; i<150; i++){
+    fgets(buffer, 2, filestream);
+    printf("%s", buffer);
   }
   return 0;
 }
