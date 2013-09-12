@@ -16,18 +16,17 @@ int main(){
 
   /* readFile("music0.mp3"); */
   
-  char c[4] = {'0', '1', '2', '3'};
-  c[0] = c[0] & 127;
-  c[0] = c[0] << 1;
-  c[1] = c[1] & 127;
-  c[1] = c[1] << 1;
-  c[2] = c[2] & 127;
-  c[2] = c[2] << 1;
-  c[3] = c[3] & 127;
-  c[3] = c[3] << 1;
-  for(int i = 0; i < 4; i++){
-    printf("%s\n", c[i]);
+  int c[4] = {0x00, 0x00, 0x01, 0x2A};
+  int temp = 0;
+  for(int i = 0; i < 3; i++){
+    c[i] =c [i] & 127;
+    temp += c[i];
+    temp = temp << 7;
   }
+  c[3] = c[3] & 127;
+  temp += c[3];
+  
+  printf("%d", temp);
 
   return 0;
   

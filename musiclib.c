@@ -1,7 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/*
+
 typedef struct{
+  char track[30];
+  char artist[30];
+  char album[30];
+  int tracknum;
+  char genre[30];
+  int year;
 }mp3Tags;
 
 typdef struct{
@@ -9,12 +17,7 @@ typdef struct{
   int frameSize;
 }frameHeader;
 
-typdef struct{
-  char ID3[3];
-  char version[2];
-  char flags[1];
-  int totalSize;
-}globalHeader;
+*/
 
 int sizeCalc(char c[4]){
   int sum = 0;
@@ -29,11 +32,20 @@ int sizeCalc(char c[4]){
   return sum;
 }
 
+int readGlobalSize(char* filestream){
+  char buffer[4];
+  filestream += 6;
+  fgets(buffer, 4, filestream);
+  return sizeCalc(sum);
+}
+
+/*
 
 frameHeader readHeader(char* filestream){
   frameHeader frameHeader;
   // reads frame header and returns information in
   // framHeader struct
+  frameHeader.framsize = sizeCalc(readfile);
   return frameHeader;
 }
 
@@ -46,21 +58,13 @@ char readFrame(int size){
 
 mp3Tags readFile(char* filename){
   FILE *filestream = fopen(filename, "r");
-  frameHeader currentFrame = readHeader();
-  char* frame = readFrame(currentFrame.framSize);
-  frame 
 }
 
+*/
+
 int main(){
-
-  mp3Tags Tags = readFile("music0.mp3");
-  printf("TAG: %s\n", Tags.tag);
-  printf("TITLE: %s\n", Tags.title);
-  printf("ARTIST: %s\n", Tags.artist);
-  printf("ALBUM: %s\n", Tags.album);
-  printf("YEAR: %s\n", Tags.year);
-  printf("%s\n", Tags.comment);
-
+  FILE *filestream = fopen("music0.mp3", "r");
+  readGlobalSize(filestream);
   return 0;
   
 }
